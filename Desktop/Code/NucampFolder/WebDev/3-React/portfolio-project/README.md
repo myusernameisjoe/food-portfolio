@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# state
+import { useState } from "react"
+place to store data where if that data changes the component will rerender
+const [state, setState] = useState(initialValue)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# map()
 
-In the project directory, you can run:
+function App() {
+  return (
+    <div>
+      {foodList.map( f => <FoodCard food = {f} />)}
+      
+    </div>
+  );
+}
 
-### `npm start`
+itterate over each object in the foodList array and apply a callback function to each object
+"f" represents each object in the array
+transform each object into JSX elements (**the FoodCard component**)
+each FoodCard component will have a **prop of food** that is equal to the object in the array
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# routing
+terminal
+- install via npm install react-router-dom
 
-### `npm test`
+index.js
+- wrap app component in BrowserRouter component
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+import { Routes, Route } from 'react-router-dom'
+import FirstPage from './FirstPage'
+import SecondPage from './SecondPage'
 
-### `npm run build`
+function App() {
+    return (
+        <>
+        <h1>My App </h1>
+        <Routes>
+            <Route path='/' element={<FirstPage/>} />
+            <Route path='/secondpage' element={<SecondPage/>} />
+        </Routes>
+        </>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    );
+};
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# URL parameter & userParams()
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ <Route path='/foods/:foodId' element={<FoodPage foodsList={foodsList} />}/>
+ - put a colon with what I wanted (aka :foodId)
+ - enables us to in our URL have dynamic routing that matches the path in the address bar
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ can deconstruct multiple with const { ethnicity, foodId } = useParams()
+ useParams will return a string so if you want a number you have to parseInt

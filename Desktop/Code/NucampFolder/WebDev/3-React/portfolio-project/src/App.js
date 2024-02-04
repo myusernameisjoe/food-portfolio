@@ -1,38 +1,35 @@
-import FoodCard from "./FoodCard"
-
-const foodList = [
-  {
-    id: 0,
-    name: "pizza",
-    protein: 15,
-    carbs: 30,
-    fat: 10,
-    calories: 300,
-  },
-  {
-    id: 1,
-    name: "burger",
-    protein: 20,
-    carbs: 40,
-    fat: 15,
-    calories: 400,
-  },
-  {
-    id: 2,
-    name: "salad",
-    protein: 10,
-    carbs: 20,
-    fat: 5,
-    calories: 200,
-  },
-];
+import { Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
+import HomePage from "./components/HomePage";
+import RandomPage from "./components/RandomPage";
+import { TEST_FOODS } from "./TEST_FOODS";
+import FoodPage from "./components/FoodPage";
+import { Navbar, Container, Nav } from 'react-bootstrap';
 
 
 function App() {
+  const [foodsList, setFoodsList] = useState(TEST_FOODS);
+
   return (
     <div>
-      {foodList.map( f => <FoodCard food = {f} />)}
-      
+      <Navbar bg="dark" variant="dark"> {/* Use 'variant' instead of 'data-bs-theme' */}
+        <Container>
+          <Navbar.Brand as={Link} to="/">My Foods</Navbar.Brand> {/* Use 'Navbar.Brand' */}
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/random">Random</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+
+      <Container className="mt-4">
+        <Routes>
+          <Route path="/" element={<HomePage foodsList={foodsList} />} />
+          <Route path="/random" element={<RandomPage foodsList={foodsList} />} />
+          <Route path="/foods/:foodId" element={<FoodPage foodsList={foodsList} />} />
+        </Routes>
+      </Container>
+
     </div>
   );
 }
@@ -41,9 +38,5 @@ export default App;
 
 
 
-// .map()
-// itterate over each object in the foodList array and apply a callback function to each object
-// "f" represents each object in the array
-// transform each object into JSX elements (**the FoodCard component**)
-// each FoodCard component will have a **prop of food** that is equal to the object in the array
+
 

@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom"
 
-function FoodCard(props) {
+function FoodCard(food) {
     return (
         <div className='bg-light border p-4 m-2'>
-          <h1>{props.food.name}</h1>
-          <p>Protein: {props.food.protein}</p>
-          <p>Carbs: {props.food.carbs}</p>
-          <p>Fat: {props.food.fat}</p>
-          <p>Calories: {props.food.calories}</p>
+          <h1>{food.name}</h1>
+          <p>Protein: {food.protein}</p>
+          <p>Carbs: {food.carbs}</p>
+          <p>Fat: {food.fat}</p>
+          <p>Calories: {food.calories}</p>
+          <p>Catagory: {food.catagory}</p>
+          <Link to={'/foods/' + food.id}>Details</Link>
         </div>
     )
 
